@@ -1,1153 +1,1205 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AllergieVrij Food Plaza — Zorgeloos Streetfood voor Mensen met Allergieën</title>
-  <style>
-    /* ==========================================================================
-       KLEURENPALET & BASISSTIJLEN (ALLES MET ZWARTE TEKST #000000)
-       ========================================================================== */
-    :root {
-      --bg-hero-header-footer: rgb(175, 212, 188);
-      --bg-page: #F2F8F4;
-      --bg-card: #FFFFFF;
-      --green-pastel-light: #DFF2E6;
-      --green-pastel: #C8E6D3;
-      --green-sage: #9FD0B2;
-      --btn-green: #74B48C;
-      --btn-green-hover: #5F9E77;
-      --btn-green-border: #528C68;
-      --teal-dark-cyan: #108C93;
-      --teal-stormy: #0C6A6F;
-      --text-black: #000000;
-      --shadow-sm: 0 2px 8px rgba(12, 106, 111, 0.08);
-      --shadow-md: 0 8px 24px rgba(12, 106, 111, 0.12);
-      --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.22);
-      --radius-sm: 8px;
-      --radius-md: 14px;
-      --radius-lg: 20px;
-      --radius-pill: 999px;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      color: var(--text-black);
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background-color: var(--bg-page);
-      color: var(--text-black);
-      line-height: 1.6;
-    }
-
-    a {
-      text-decoration: none;
-      color: var(--text-black);
-    }
-
-    img {
-      display: block;
-      max-width: 100%;
-    }
-
-    .container {
-      width: 100%;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
-
-    /* ==========================================================================
-       KNOPPEN (DONKERDER GROEN #74B48C MET ZWARTE TEKST)
-       ========================================================================== */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      padding: 10px 18px;
-      font-size: 0.95rem;
-      font-weight: 700;
-      color: var(--text-black);
-      background-color: var(--btn-green);
-      border: 2px solid var(--btn-green-border);
-      border-radius: var(--radius-sm);
-      cursor: pointer;
-      transition: background-color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
-    }
-
-    .btn:hover {
-      background-color: var(--btn-green-hover);
-      transform: translateY(-1px);
-      box-shadow: var(--shadow-sm);
-    }
-
-    .btn:active {
-      transform: translateY(0);
-    }
-
-    .btn-full {
-      width: 100%;
-    }
-
-    .btn-pill {
-      border-radius: var(--radius-pill);
-    }
-
-    /* ==========================================================================
-       HEADER & NAVIGATIE
-       ========================================================================== */
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background-color: var(--bg-hero-header-footer);
-      border-bottom: 2px solid var(--teal-stormy);
-      box-shadow: var(--shadow-sm);
-    }
-
-    .nav-wrapper {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      min-height: 72px;
-      gap: 16px;
-      flex-wrap: wrap;
-      padding: 10px 0;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-weight: 800;
-      font-size: 1.25rem;
-    }
-
-    .brand-icon {
-      width: 40px;
-      height: 40px;
-      border-radius: 10px;
-      background-color: var(--green-pastel-light);
-      border: 2px solid var(--teal-stormy);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.3rem;
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 22px;
-      flex-wrap: wrap;
-    }
-
-    .nav-links a {
-      font-weight: 600;
-      font-size: 0.95rem;
-      padding: 6px 10px;
-      border-radius: var(--radius-sm);
-      transition: background-color 0.2s ease;
-    }
-
-    .nav-links a:hover {
-      background-color: var(--green-pastel-light);
-    }
-
-    .fav-badge-count {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-width: 22px;
-      height: 22px;
-      padding: 0 6px;
-      font-size: 0.8rem;
-      font-weight: 800;
-      background-color: var(--bg-card);
-      border: 1.5px solid var(--btn-green-border);
-      border-radius: var(--radius-pill);
-    }
-
-    /* ==========================================================================
-       HERO SECTIE (HOOFDSCHERM MET RGB(175, 212, 188))
-       ========================================================================== */
-    .hero {
-      background-color: var(--bg-hero-header-footer);
-      border-bottom: 2px solid var(--teal-stormy);
-      padding: 48px 0 56px;
-    }
-
-    .hero-content {
-      max-width: 860px;
-      margin: 0 auto;
-      text-align: center;
-    }
-
-    .hero-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background-color: var(--green-pastel-light);
-      border: 2px solid var(--teal-dark-cyan);
-      padding: 6px 16px;
-      border-radius: var(--radius-pill);
-      font-size: 0.88rem;
-      font-weight: 700;
-      margin-bottom: 18px;
-    }
-
-    .hero h1 {
-      font-size: clamp(1.9rem, 4vw, 2.9rem);
-      font-weight: 800;
-      line-height: 1.2;
-      margin-bottom: 16px;
-    }
-
-    .hero p {
-      font-size: 1.1rem;
-      max-width: 700px;
-      margin: 0 auto 28px;
-      font-weight: 500;
-    }
-
-    /* Zoekbalk */
-    .search-box {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      max-width: 680px;
-      margin: 0 auto 30px;
-      background-color: var(--bg-card);
-      border: 2px solid var(--teal-stormy);
-      border-radius: var(--radius-md);
-      padding: 8px 12px;
-      box-shadow: var(--shadow-md);
-    }
-
-    .search-box span.search-icon {
-      font-size: 1.2rem;
-      padding-left: 6px;
-    }
-
-    .search-box input {
-      flex: 1;
-      border: none;
-      outline: none;
-      font-size: 1rem;
-      background: transparent;
-      color: var(--text-black);
-      padding: 8px 4px;
-    }
-
-    .search-box input::placeholder {
-      color: var(--text-black);
-      opacity: 0.7;
-    }
-
-    /* Hero Banner Foto */
-    .hero-banner-wrap {
-      max-width: 960px;
-      margin: 0 auto;
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      border: 3px solid var(--teal-stormy);
-      box-shadow: var(--shadow-lg);
-      background-color: var(--green-pastel-light);
-      position: relative;
-    }
-
-    .hero-banner-wrap img {
-      width: 100%;
-      height: 320px;
-      object-fit: cover;
-    }
-
-    .hero-banner-caption {
-      background-color: var(--bg-card);
-      border-top: 2px solid var(--teal-stormy);
-      padding: 12px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 10px;
-      font-size: 0.9rem;
-      font-weight: 600;
-    }
-
-    /* ==========================================================================
-       ALLERGIE FILTER MATRIX
-       ========================================================================== */
-    .section {
-      padding: 52px 0;
-    }
-
-    .filter-panel {
-      background-color: var(--bg-card);
-      border: 2px solid var(--green-sage);
-      border-radius: var(--radius-lg);
-      padding: 28px;
-      box-shadow: var(--shadow-md);
-      margin-bottom: 36px;
-    }
-
-    .filter-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      flex-wrap: wrap;
-      gap: 16px;
-      margin-bottom: 20px;
-    }
-
-    .filter-header h2 {
-      font-size: 1.45rem;
-      font-weight: 800;
-      margin-bottom: 4px;
-    }
-
-    .filter-header p {
-      font-size: 0.95rem;
-    }
-
-    .filter-actions {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .allergen-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
-      gap: 12px;
-      margin-bottom: 20px;
-    }
-
-    .allergen-chip {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      padding: 12px 16px;
-      background-color: var(--green-pastel-light);
-      border: 2px solid var(--green-sage);
-      border-radius: var(--radius-md);
-      font-size: 0.95rem;
-      font-weight: 700;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      text-align: left;
-    }
-
-    .allergen-chip:hover {
-      background-color: var(--green-pastel);
-      border-color: var(--teal-dark-cyan);
-    }
-
-    /* Actieve filterknop in de donkerdere groentint */
-    .allergen-chip.active {
-      background-color: var(--btn-green);
-      border-color: var(--btn-green-border);
-      box-shadow: var(--shadow-sm);
-    }
-
-    .allergen-chip.active:hover {
-      background-color: var(--btn-green-hover);
-    }
-
-    .chip-left {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .chip-check {
-      width: 22px;
-      height: 22px;
-      border-radius: 6px;
-      border: 2px solid var(--btn-green-border);
-      background-color: var(--bg-card);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.85rem;
-      font-weight: 900;
-    }
-
-    .filter-status-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 12px;
-      padding-top: 16px;
-      border-top: 1.5px solid var(--green-pastel);
-      font-size: 0.95rem;
-      font-weight: 700;
-    }
-
-    .fav-only-toggle {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 14px;
-      background-color: var(--green-pastel-light);
-      border: 2px solid var(--green-sage);
-      border-radius: var(--radius-pill);
-      font-weight: 700;
-      font-size: 0.9rem;
-      cursor: pointer;
-    }
-
-    .fav-only-toggle.active {
-      background-color: var(--btn-green);
-      border-color: var(--btn-green-border);
-    }
-
-    /* ==========================================================================
-       FOODTENTS KAARTEN OVERZICHT
-       ========================================================================== */
-    .tents-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-      gap: 26px;
-    }
-
-    .tent-card {
-      background-color: var(--bg-card);
-      border: 2px solid var(--green-sage);
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      box-shadow: var(--shadow-sm);
-      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-    }
-
-    .tent-card:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-md);
-      border-color: var(--teal-dark-cyan);
-    }
-
-    .tent-image-wrap {
-      position: relative;
-      height: 208px;
-      background-color: var(--green-pastel-light);
-      border-bottom: 2px solid var(--green-pastel);
-      overflow: hidden;
-    }
-
-    .tent-image-wrap img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .tent-stall-badge {
-      position: absolute;
-      top: 12px;
-      left: 12px;
-      background-color: var(--green-pastel);
-      border: 2px solid var(--teal-stormy);
-      padding: 4px 12px;
-      border-radius: var(--radius-pill);
-      font-size: 0.82rem;
-      font-weight: 800;
-    }
-
-    .tent-fav-btn {
-      position: absolute;
-      top: 12px;
-      right: 12px;
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      background-color: var(--bg-card);
-      border: 2px solid var(--teal-stormy);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.15rem;
-      cursor: pointer;
-      transition: transform 0.15s ease, background-color 0.2s ease;
-    }
-
-    .tent-fav-btn:hover {
-      transform: scale(1.08);
-      background-color: var(--green-pastel-light);
-    }
-
-    .tent-fav-btn.is-fav {
-      background-color: var(--btn-green);
-      border-color: var(--btn-green-border);
-    }
-
-    .tent-body {
-      padding: 22px;
-      display: flex;
-      flex-direction: column;
-      flex: 1;
-    }
-
-    .tent-cuisine {
-      font-size: 0.82rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-      background-color: var(--green-pastel-light);
-      border: 1.5px solid var(--green-sage);
-      display: inline-block;
-      align-self: flex-start;
-      padding: 3px 10px;
-      border-radius: var(--radius-pill);
-      margin-bottom: 10px;
-    }
-
-    .tent-title {
-      font-size: 1.3rem;
-      font-weight: 800;
-      margin-bottom: 8px;
-    }
-
-    .tent-desc {
-      font-size: 0.95rem;
-      margin-bottom: 16px;
-    }
-
-    .tent-badges {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-bottom: 20px;
-    }
-
-    .safe-badge {
-      font-size: 0.78rem;
-      font-weight: 700;
-      background-color: var(--green-pastel-light);
-      border: 1.5px solid var(--teal-dark-cyan);
-      padding: 4px 10px;
-      border-radius: var(--radius-pill);
-    }
-
-    .tent-footer {
-      margin-top: auto;
-      padding-top: 14px;
-      border-top: 1.5px solid var(--green-pastel);
-    }
-
-    /* Lege staat bij geen resultaten */
-    .empty-state {
-      grid-column: 1 / -1;
-      text-align: center;
-      background-color: var(--bg-card);
-      border: 2px dashed var(--teal-dark-cyan);
-      border-radius: var(--radius-lg);
-      padding: 48px 24px;
-    }
-
-    .empty-state h3 {
-      font-size: 1.35rem;
-      font-weight: 800;
-      margin-bottom: 8px;
-    }
-
-    .empty-state p {
-      max-width: 520px;
-      margin: 0 auto 20px;
-    }
-
-    /* ==========================================================================
-       VEILIGHEIDSBELOFTES SECTIE
-       ========================================================================== */
-    .safety-section {
-      background-color: var(--green-pastel-light);
-      border-top: 2px solid var(--green-sage);
-      border-bottom: 2px solid var(--green-sage);
-      padding: 56px 0;
-    }
-
-    .section-heading {
-      text-align: center;
-      max-width: 720px;
-      margin: 0 auto 36px;
-    }
-
-    .section-heading h2 {
-      font-size: 1.85rem;
-      font-weight: 800;
-      margin-bottom: 10px;
-    }
-
-    .safety-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 22px;
-    }
-
-    .safety-card {
-      background-color: var(--bg-card);
-      border: 2px solid var(--teal-dark-cyan);
-      border-radius: var(--radius-md);
-      padding: 24px;
-      box-shadow: var(--shadow-sm);
-    }
-
-    .safety-icon {
-      width: 46px;
-      height: 46px;
-      border-radius: 12px;
-      background-color: var(--green-pastel);
-      border: 2px solid var(--teal-stormy);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.4rem;
-      margin-bottom: 14px;
-    }
-
-    .safety-card h3 {
-      font-size: 1.12rem;
-      font-weight: 800;
-      margin-bottom: 8px;
-    }
-
-    .safety-card p {
-      font-size: 0.93rem;
-    }
-
-    /* ==========================================================================
-       AANMELDFORMULIER VOOR NIEUWE FOODTENTS
-       ========================================================================== */
-    .register-box {
-      max-width: 780px;
-      margin: 0 auto;
-      background-color: var(--bg-card);
-      border: 2px solid var(--teal-stormy);
-      border-radius: var(--radius-lg);
-      padding: 34px;
-      box-shadow: var(--shadow-md);
-    }
-
-    .form-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 18px;
-      margin-bottom: 18px;
-    }
-
-    .form-group {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      margin-bottom: 16px;
-    }
-
-    .form-group label {
-      font-weight: 700;
-      font-size: 0.95rem;
-    }
-
-    .form-group input,
-    .form-group select,
-    .form-group textarea {
-      padding: 11px 14px;
-      font-size: 0.95rem;
-      font-family: inherit;
-      background-color: var(--bg-page);
-      border: 2px solid var(--green-sage);
-      border-radius: var(--radius-sm);
-      color: var(--text-black);
-      outline: none;
-    }
-
-    .form-group input:focus,
-    .form-group select:focus,
-    .form-group textarea:focus {
-      border-color: var(--teal-stormy);
-      background-color: var(--bg-card);
-    }
-
-    .checkbox-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
-      gap: 10px;
-      background-color: var(--green-pastel-light);
-      padding: 14px;
-      border-radius: var(--radius-sm);
-      border: 1.5px solid var(--green-sage);
-    }
-
-    .checkbox-item {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 0.9rem;
-      font-weight: 600;
-      cursor: pointer;
-    }
-
-    .checkbox-item input[type="checkbox"] {
-      width: 17px;
-      height: 17px;
-      accent-color: var(--teal-stormy);
-    }
-
-    .form-feedback {
-      display: none;
-      margin-top: 18px;
-      padding: 16px;
-      border-radius: var(--radius-sm);
-      background-color: var(--green-pastel);
-      border: 2px solid var(--teal-stormy);
-      font-weight: 700;
-    }
-
-    /* ==========================================================================
-       DETAIL MODAL (MENU & PROTOCOL)
-       ========================================================================== */
-    .modal-backdrop {
-      position: fixed;
-      inset: 0;
-      background-color: rgba(0, 0, 0, 0.58);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      z-index: 999;
-    }
-
-    .modal-backdrop.open {
-      display: flex;
-    }
-
-    .modal-card {
-      background-color: var(--bg-card);
-      border: 3px solid var(--teal-stormy);
-      border-radius: var(--radius-lg);
-      max-width: 720px;
-      width: 100%;
-      max-height: 90vh;
-      overflow-y: auto;
-      box-shadow: var(--shadow-lg);
-    }
-
-    .modal-hero-img {
-      width: 100%;
-      height: 230px;
-      object-fit: cover;
-      border-bottom: 2px solid var(--teal-stormy);
-      background-color: var(--green-pastel-light);
-    }
-
-    .modal-content {
-      padding: 26px;
-    }
-
-    .modal-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 14px;
-      flex-wrap: wrap;
-      margin-bottom: 14px;
-    }
-
-    .modal-top h2 {
-      font-size: 1.55rem;
-      font-weight: 800;
-    }
-
-    .protocol-box {
-      background-color: var(--green-pastel-light);
-      border: 2px solid var(--teal-dark-cyan);
-      border-radius: var(--radius-md);
-      padding: 16px 18px;
-      margin: 18px 0;
-    }
-
-    .protocol-box h4 {
-      font-size: 1rem;
-      font-weight: 800;
-      margin-bottom: 6px;
-    }
-
-    .menu-list {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      margin: 14px 0 22px;
-    }
-
-    .menu-item {
-      background-color: var(--bg-page);
-      border: 1.5px solid var(--green-sage);
-      border-radius: var(--radius-sm);
-      padding: 14px 16px;
-    }
-
-    .menu-item-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 10px;
-      font-weight: 800;
-      margin-bottom: 4px;
-    }
-
-    .menu-item-price {
-      background-color: var(--green-pastel);
-      border: 1.5px solid var(--teal-stormy);
-      padding: 2px 10px;
-      border-radius: var(--radius-pill);
-      font-size: 0.88rem;
-    }
-
-    .modal-footer-actions {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-      flex-wrap: wrap;
-      padding-top: 16px;
-      border-top: 2px solid var(--green-pastel);
-    }
-
-    /* ==========================================================================
-       FOOTER (RGB(175, 212, 188) MET ZWARTE TEKST)
-       ========================================================================== */
-    footer {
-      background-color: var(--bg-hero-header-footer);
-      border-top: 2px solid var(--teal-stormy);
-      padding: 40px 0 28px;
-      margin-top: 40px;
-    }
-
-    .footer-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 28px;
-      margin-bottom: 28px;
-    }
-
-    .footer-grid h3,
-    .footer-grid h4 {
-      font-weight: 800;
-      margin-bottom: 10px;
-    }
-
-    .footer-links {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .footer-links a {
-      font-weight: 600;
-    }
-
-    .footer-links a:hover {
-      text-decoration: underline;
-    }
-
-    .footer-bottom {
-      text-align: center;
-      padding-top: 18px;
-      border-top: 1.5px solid var(--teal-stormy);
-      font-size: 0.9rem;
-      font-weight: 600;
-    }
-
-    @media (max-width: 640px) {
-      .hero-banner-wrap img {
-        height: 220px;
-      }
-      .tents-grid {
-        grid-template-columns: 1fr;
-      }
-      .register-box {
-        padding: 22px;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AllergieVrij Food Plaza - Vind Allergievriendelijke Food Tents</title>
+    <!-- Tailwind CSS for modern responsive utility styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        // Custom Tailwind configuration for theme colors
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        emerald: {
+                            50: '#ecfdf5',
+                            100: '#d1fae5',
+                            600: '#059669',
+                            700: '#047857',
+                            800: '#065f46',
+                        },
+                        amber: {
+                            50: '#fffbeb',
+                            100: '#fef3c7',
+                            500: '#f59e0b',
+                            600: '#d97706',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom smooth scrollbar & transition utilities */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        .modal-backdrop {
+            background-color: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(4px);
+        }
+    </style>
 </head>
-<body>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased min-h-screen flex flex-col selection:bg-emerald-200">
 
-  <!-- HEADER -->
-  <header>
-    <div class="container nav-wrapper">
-      <a href="#top" class="brand">
-        <span class="brand-icon">🌿</span>
-        <span>AllergieVrij Food Plaza</span>
-      </a>
+    <header class="sticky top-0 z-30 bg-white/90 backdrop-blur-md border-b border-slate-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <div class="flex items-center space-x-3 cursor-pointer" onclick="resetFilters()">
+                    <div class="w-11 h-11 bg-emerald-600 rounded-2xl flex items-center justify-center text-white shadow-md shadow-emerald-600/30">
+                        <i class="fa-solid fa-shield-halved text-2xl"></i>
+                    </div>
+                    <div>
+                        <span class="text-xl font-bold bg-gradient-to-r from-emerald-700 to-teal-600 bg-clip-text text-transparent block leading-none">
+                            AllergieVrij
+                        </span>
+                        <span class="text-xs font-semibold tracking-wider text-amber-600 uppercase">
+                            Food Plaza
+                        </span>
+                    </div>
+                </div>
 
-      <nav class="nav-links" aria-label="Hoofdnavigatie">
-        <a href="#filter-sectie">Allergie Filter</a>
-        <a href="#foodtents-sectie">Foodtents</a>
-        <a href="#veiligheid-sectie">Veiligheid</a>
-        <a href="#aanmelden-sectie">Aanmelden</a>
-        <button type="button" id="headerFavBtn" class="btn btn-pill" title="Toon mijn bewaarde favorieten">
-          ♥ Favorieten <span id="favCountBadge" class="fav-badge-count">0</span>
-        </button>
-      </nav>
-    </div>
-  </header>
+                <!-- Action Buttons -->
+                <div class="flex items-center space-x-3">
+                    <button onclick="toggleFavoritesOnly()" id="fav-toggle-btn" class="flex items-center space-x-2 px-4 py-2.5 rounded-xl border border-slate-200 text-slate-700 hover:border-amber-400 hover:text-amber-600 transition-all font-medium text-sm">
+                        <i class="fa-solid fa-heart text-amber-500" id="fav-icon"></i>
+                        <span class="hidden sm:inline">Favorieten</span>
+                        <span id="fav-count-badge" class="bg-amber-100 text-amber-800 text-xs px-2 py-0.5 rounded-full font-bold">0</span>
+                    </button>
 
-  <!-- HERO SECTIE (HOOFDSCHERM) -->
-  <section id="top" class="hero">
-    <div class="container hero-content">
-      <div class="hero-pill">
-        <span>🛡️</span>
-        <span>100% Transparante Allergeneninformatie &amp; Gescheiden Keukens</span>
-      </div>
-
-      <h1>Zorgeloos genieten van streetfood, speciaal voor mensen met meerdere allergieën</h1>
-
-      <p>
-        Selecteer jouw voedselallergieën en ontdek direct welke foodtents op ons plein volledig veilig voor jou koken — inclusief gecertificeerde kruisbesmettingsprotocollen.
-      </p>
-
-      <!-- Zoekbalk -->
-      <div class="search-box">
-        <span class="search-icon">🔍</span>
-        <input
-          type="text"
-          id="searchInput"
-          placeholder="Zoek op gerecht, foodtent of ingrediënt (bijv. taco, soep, glutenvrij)..."
-          aria-label="Zoek op gerecht of foodtent"
-        />
-        <button type="button" id="clearSearchBtn" class="btn" style="padding: 7px 14px; font-size: 0.85rem;">
-          Wissen
-        </button>
-      </div>
-
-      <!-- Hero Sfeerfoto -->
-      <div class="hero-banner-wrap">
-        <img
-          id="heroBannerImg"
-          src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=1400&q=80"
-          alt="Sfeerbeeld van AllergieVrij Food Plaza met verse gerechten en foodtents"
-        />
-        <div class="hero-banner-caption">
-          <span>📍 Food Plaza Plein — Open van 11:30 tot 22:00 uur</span>
-          <span>✅ Alle 6 foodtents gekeurd op kruisbesmetting</span>
+                    <button onclick="openAddModal()" class="flex items-center space-x-2 bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2.5 rounded-xl shadow-md shadow-emerald-600/20 transition-all font-medium text-sm">
+                        <i class="fa-solid fa-plus"></i>
+                        <span class="hidden md:inline">Kraampje Aanmelden</span>
+                    </button>
+                </div>
+            </div>
         </div>
-      </div>
+    </header>
+
+    <main class="flex-grow">
+        <section class="relative bg-gradient-to-b from-emerald-50 via-teal-50/30 to-slate-50 pt-12 pb-16 border-b border-emerald-100/60">
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 text-center">
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-100/80 text-emerald-800 text-xs font-semibold mb-4 border border-emerald-200">
+                    <i class="fa-solid fa-leaf text-emerald-600"></i> Veilig, Onbezorgd & Transparant
+                </span>
+                <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight mb-4">
+                    Zorgeloos Eten & Genieten <br class="hidden sm:inline">
+                    <span class="text-emerald-700">Vind Allergievriendelijke Food Tents</span>
+                </h1>
+                <p class="text-slate-600 text-base sm:text-lg max-w-2xl mx-auto mb-8">
+                    Ontdek eetkraampjes die speciaal zijn uitgerust met strenge protocollen tegen kruisbesmetting en een helder overzicht van alle ingrediënten.
+                </p>
+
+                <!-- Main Search Bar -->
+                <div class="max-w-2xl mx-auto relative group">
+                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400 group-focus-within:text-emerald-600 transition-colors">
+                        <i class="fa-solid fa-magnifying-glass text-lg"></i>
+                    </div>
+                    <input type="text" id="search-input" oninput="handleSearch()" placeholder="Zoek op naam of eten (bijv. 'Pannenkoeken', 'Patat', 'IJs', 'Burgers', 'Aziatisch')..." class="w-full pl-11 pr-24 py-4 rounded-2xl border border-slate-200 bg-white shadow-lg shadow-slate-200/50 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 text-slate-800 placeholder-slate-400 text-base">
+                    <button onclick="clearSearch()" id="clear-search-btn" class="hidden absolute right-3 top-1/2 -translate-y-1/2 bg-slate-100 hover:bg-slate-200 text-slate-600 text-xs font-semibold px-3 py-1.5 rounded-lg transition-colors">
+                        Wis
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-6 z-20 relative">
+            <div class="bg-white rounded-3xl p-6 shadow-xl shadow-slate-200/60 border border-slate-100">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4 pb-4 border-b border-slate-100">
+                    <div>
+                        <h2 class="text-lg font-bold text-slate-900 flex items-center gap-2">
+                            <i class="fa-solid fa-filter text-emerald-600"></i> Selecteer Jouw Allergieën & Wensen
+                        </h2>
+                        <p class="text-xs text-slate-500">
+                            Selecteer een of meerdere opties. Alleen kraampjes die aan <strong>ALLES</strong> voldoen worden getoond.
+                        </p>
+                    </div>
+                    <button onclick="resetFilters()" class="text-xs text-slate-500 hover:text-emerald-700 underline font-medium self-start md:self-auto">
+                        Reset alle filters
+                    </button>
+                </div>
+
+                <!-- Filter Matrix Grid -->
+                <div id="allergy-filter-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2.5">
+                    <!-- Dynamic rendering of filter buttons will happen via JS -->
+                </div>
+            </div>
+        </section>
+
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+            <!-- Results Counter & Status Bar -->
+            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 gap-3">
+                <div class="flex items-center space-x-2">
+                    <h3 class="text-xl font-bold text-slate-900">Aanbevolen Food Tents</h3>
+                    <span id="results-count" class="bg-emerald-100 text-emerald-800 text-xs font-bold px-2.5 py-1 rounded-full">
+                        23 restaurants
+                    </span>
+                </div>
+                <div id="active-filter-tags" class="flex flex-wrap gap-1.5 text-xs">
+                    <!-- Active filter pills will appear here -->
+                </div>
+            </div>
+
+            <!-- Food Stalls Cards Grid -->
+            <div id="tents-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Food Tent Cards generated dynamically -->
+            </div>
+
+            <!-- Empty State Placeholder -->
+            <div id="empty-state" class="hidden text-center py-16 bg-white rounded-3xl border border-dashed border-slate-300 p-8">
+                <div class="w-16 h-16 bg-amber-50 text-amber-500 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                </div>
+                <h3 class="text-lg font-bold text-slate-800 mb-1">Geen kraampjes gevonden</h3>
+                <p class="text-slate-500 text-sm max-w-md mx-auto mb-6">
+                    Er zijn momenteel geen food tents die aan alle geselecteerde allergiefilters of zoektermen voldoen. Probeer een filter uit te vinken.
+                </p>
+                <button onclick="resetFilters()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-medium text-sm px-5 py-2.5 rounded-xl shadow-md transition-all">
+                    Reset alle zoekcriteria
+                </button>
+            </div>
+        </section>
+
+        <section class="bg-emerald-900 text-white py-12 mt-8">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+                    
+                    <!-- Tips Column -->
+                    <div class="lg:col-span-2">
+                        <div class="flex items-center space-x-3 mb-6">
+                            <div class="p-3 bg-emerald-800/80 rounded-2xl text-emerald-300">
+                                <i class="fa-solid fa-lightbulb text-2xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold">Tips voor Veilig Eten op Evenementen</h3>
+                                <p class="text-emerald-200 text-sm">Zo geniet je met een gerust hart van elk festival of markt.</p>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div class="bg-emerald-800/40 border border-emerald-700/50 p-4 rounded-2xl">
+                                <div class="font-semibold text-emerald-200 text-sm mb-1 flex items-center gap-2">
+                                    <i class="fa-solid fa-comments text-amber-400"></i> 1. Dubbelcheck bij de kraam
+                                </div>
+                                <p class="text-xs text-slate-300">Meld jouw specifieke allergie altijd mondeling vóór het bestellen, ook als er 'Glutenvrij' op het bord staat.</p>
+                            </div>
+
+                            <div class="bg-emerald-800/40 border border-emerald-700/50 p-4 rounded-2xl">
+                                <div class="font-semibold text-emerald-200 text-sm mb-1 flex items-center gap-2">
+                                    <i class="fa-solid fa-clock text-amber-400"></i> 2. Vermijd de ergste spits
+                                </div>
+                                <p class="text-xs text-slate-300">Tijdens rustigere uren heeft het personeel extra tijd en aandacht om schone spullen te pakken.</p>
+                            </div>
+
+                            <div class="bg-emerald-800/40 border border-emerald-700/50 p-4 rounded-2xl">
+                                <div class="font-semibold text-emerald-200 text-sm mb-1 flex items-center gap-2">
+                                    <i class="fa-solid fa-utensils text-amber-400"></i> 3. Vraag naar bereidingswijzen
+                                </div>
+                                <p class="text-xs text-slate-300">Vraag of patat in een aparte frituur wordt gebakken waarin geen allergenen (zoals kroketten) gaan.</p>
+                            </div>
+
+                            <div class="bg-emerald-800/40 border border-emerald-700/50 p-4 rounded-2xl">
+                                <div class="font-semibold text-emerald-200 text-sm mb-1 flex items-center gap-2">
+                                    <i class="fa-solid fa-kit-medical text-amber-400"></i> 4. Neem Noodmedicatie Mee
+                                </div>
+                                <p class="text-xs text-slate-300">Houd je Epipen of antihistamine altijd bij de hand op het terrein voor noodgevallen.</p>
+                            </div>
+
+                            <div class="bg-emerald-800/40 border border-emerald-700/50 p-4 rounded-2xl sm:col-span-2">
+                                <div class="font-semibold text-emerald-200 text-sm mb-1 flex items-center gap-2">
+                                    <i class="fa-solid fa-shrimp text-amber-400"></i> 5. Let op verborgen schaaldieren
+                                </div>
+                                <p class="text-xs text-slate-300">Schaaldieren zitten vaak in gerechten waar je ze niet verwacht, zoals kroepoek, sambal, surimi, sushi en bouillabaisse. Veel mensen met een schaaldierallergie reageren ook op weekdieren zoals mosselen en oesters. Vraag daarom altijd naar de ingrediënten van sauzen en bouillon.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Disclaimer Box -->
+                    <div class="bg-amber-500/10 border border-amber-500/30 p-6 rounded-3xl text-amber-100">
+                        <div class="flex items-center space-x-2 text-amber-400 font-bold mb-3">
+                            <i class="fa-solid fa-triangle-exclamation text-xl"></i>
+                            <span>Belangrijke Disclaimer</span>
+                        </div>
+                        <p class="text-xs leading-relaxed text-amber-200/90 mb-4">
+                            AllergieVrij Food Plaza dient als een informatief platform. Hoewel kraampjes hun best doen kruisbesmetting te voorkomen, wijzigen recepturen en leveranciers soms. 
+                        </p>
+                        <p class="text-xs leading-relaxed text-amber-200/90 font-medium">
+                            <strong class="text-amber-300">Onthoud:</strong> Controleer ter plekke altijd direct met de kok of de ingrediënten op dat moment 100% veilig zijn voor jouw allergie.
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 py-8 border-t border-slate-800 text-xs">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center space-x-2">
+                <i class="fa-solid fa-shield-halved text-emerald-500"></i>
+                <span class="font-semibold text-slate-200">AllergieVrij Food Plaza</span>
+                <span>&copy; 2026 - Samen veilig genieten</span>
+            </div>
+            <p>Ontwikkeld met zorg voor een allergieneutraal evenement.</p>
+        </div>
+    </footer>
+
+    <div id="detail-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 hidden">
+        <!-- Backdrop -->
+        <div class="absolute inset-0 modal-backdrop" onclick="closeModal()"></div>
+        
+        <!-- Modal Body -->
+        <div class="relative bg-white rounded-3xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto z-10 overflow-hidden flex flex-col">
+            <!-- Modal Header Image -->
+            <div class="relative h-48 sm:h-56 w-full">
+                <img id="modal-image" src="" alt="Food stall image" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/20 to-transparent"></div>
+                <button onclick="closeModal()" class="absolute top-4 right-4 bg-white/80 hover:bg-white text-slate-700 w-9 h-9 rounded-full flex items-center justify-center shadow-md transition-all">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+                <div class="absolute bottom-4 left-6 right-6 text-white">
+                    <span id="modal-stand-location" class="inline-block bg-emerald-600 text-white text-xs font-semibold px-2.5 py-1 rounded-md mb-2 shadow"></span>
+                    <h3 id="modal-title" class="text-2xl font-extrabold leading-tight"></h3>
+                </div>
+            </div>
+
+            <!-- Modal Content Padding -->
+            <div class="p-6 space-y-6 flex-grow">
+                <!-- Safety Protocol Block -->
+                <div class="bg-emerald-50 border border-emerald-200 rounded-2xl p-4">
+                    <h4 class="font-bold text-emerald-900 text-sm mb-2 flex items-center gap-2">
+                        <i class="fa-solid fa-shield-virus text-emerald-600"></i> Kruisbesmettings-protocol & Veiligheid
+                    </h4>
+                    <p id="modal-safety-info" class="text-xs text-emerald-800 leading-relaxed"></p>
+                </div>
+
+                <!-- Safe Allergies Badges -->
+                <div>
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Geschikt Voor Allergieën / Dieet:</h4>
+                    <div id="modal-allergies-list" class="flex flex-wrap gap-2"></div>
+                </div>
+
+                <!-- Menu Section -->
+                <div>
+                    <h4 class="font-bold text-slate-900 text-base mb-3 flex items-center gap-2">
+                        <i class="fa-solid fa-utensils text-amber-500"></i> Menu & Ingrediënten
+                    </h4>
+                    <div id="modal-menu-list" class="space-y-3">
+                        <!-- Menu items loaded dynamically -->
+                    </div>
+                </div>
+
+                <!-- Beschrijving (klein) -->
+                <div id="modal-description-wrap" class="hidden">
+                    <p id="modal-description" class="text-[11px] leading-relaxed text-slate-400"></p>
+                </div>
+
+                <!-- Contact & Certification -->
+                <div class="pt-4 border-t border-slate-100 flex flex-col sm:flex-row justify-between text-xs text-slate-500 gap-2">
+                    <div>
+                        <span class="font-semibold text-slate-700">Certificering:</span> <span id="modal-certificate"></span>
+                    </div>
+                    <div>
+                        <span class="font-semibold text-slate-700">Contactpersoon:</span> <span id="modal-contact"></span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-slate-50 px-6 py-4 border-t border-slate-100 flex justify-end">
+                <button onclick="closeModal()" class="bg-slate-800 hover:bg-slate-900 text-white font-medium text-sm px-5 py-2.5 rounded-xl transition-colors">
+                    Sluiten
+                </button>
+            </div>
+        </div>
     </div>
-  </section>
 
-  <!-- FILTER & FOODTENTS SECTIE -->
-  <main class="section">
-    <div class="container">
-
-      <!-- Allergie Filter Matrix -->
-      <section id="filter-sectie" class="filter-panel" aria-labelledby="filter-titel">
-        <div class="filter-header">
-          <div>
-            <h2 id="filter-titel">Filter op jouw allergieën (AND-logica)</h2>
-            <p>Vink alle allergenen aan die je wilt vermijden. We tonen alleen kramen die <strong>100% vrij zijn van al jouw geselecteerde allergenen</strong>.</p>
-          </div>
-          <div class="filter-actions">
-            <button type="button" id="resetFiltersBtn" class="btn">
-              ↺ Wis filters
+    <div id="add-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 hidden">
+        <div class="absolute inset-0 modal-backdrop" onclick="closeAddModal()"></div>
+        <div class="relative bg-white rounded-3xl shadow-2xl max-w-xl w-full max-h-[90vh] overflow-y-auto z-10 p-6 sm:p-8">
+            <button onclick="closeAddModal()" class="absolute top-5 right-5 text-slate-400 hover:text-slate-600 text-xl">
+                <i class="fa-solid fa-xmark"></i>
             </button>
-          </div>
+
+            <div class="mb-6">
+                <h3 class="text-2xl font-bold text-slate-900">Meld een Food Tent Aan</h3>
+                <p class="text-xs text-slate-500 mt-1">Voeg een allergievriendelijk kraampje toe aan het platform.</p>
+            </div>
+
+            <form id="add-tent-form" onsubmit="handleAddTent(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">Naam van het Kraampje *</label>
+                    <input type="text" required id="input-name" placeholder="bijv. De Veilige Snackkraam" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-emerald-500 focus:outline-none">
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Stand / Zone Locatie *</label>
+                        <input type="text" required id="input-location" placeholder="bijv. Stand B04 - Zone Blauw" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-emerald-500 focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Eten Type / Categorie *</label>
+                        <input type="text" required id="input-category" placeholder="bijv. Patat & Snacks" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-emerald-500 focus:outline-none">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">Afbeelding URL (Optioneel)</label>
+                    <input type="url" id="input-image" placeholder="https://images.unsplash.com/..." class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-emerald-500 focus:outline-none">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-2">Geschikt voor welke allergieën? *</label>
+                    <div id="add-modal-allergies" class="grid grid-cols-2 gap-2 text-xs">
+                        <!-- Dynamic checkboxes from allergy list -->
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">Kruisbesmettingsmaatregelen *</label>
+                    <textarea required id="input-safety" rows="2" placeholder="Beschrijf bijvoorbeeld: Gescheiden frituur, schone snijplanken, allergenen-analyse..." class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-emerald-500 focus:outline-none"></textarea>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">Voorbeeld Menu & Ingrediënten</label>
+                    <textarea id="input-menu" rows="2" placeholder="bijv. Glutenvrije Frites - 100% Aardappel, Friteuse-olie (geen glutenbesmetting)" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-emerald-500 focus:outline-none"></textarea>
+                </div>
+
+                <div class="pt-4 flex justify-end gap-3">
+                    <button type="button" onclick="closeAddModal()" class="px-4 py-2.5 rounded-xl border border-slate-300 text-slate-600 text-sm font-medium hover:bg-slate-50">Annuleren</button>
+                    <button type="submit" class="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold shadow-md">Kraam Toevoegen</button>
+                </div>
+            </form>
         </div>
-
-        <div id="allergenButtonsGrid" class="allergen-grid">
-          <!-- Wordt dynamisch gevuld via JavaScript -->
-        </div>
-
-        <div class="filter-status-bar">
-          <span id="resultsCounter">6 van de 6 foodtents voldoen aan jouw wensen</span>
-
-          <button type="button" id="favOnlyToggle" class="fav-only-toggle">
-            <span>♥</span>
-            <span>Alleen mijn favorieten tonen</span>
-          </button>
-        </div>
-      </section>
-
-      <!-- Overzicht Foodtents -->
-      <section id="foodtents-sectie" aria-label="Overzicht van allergievrije foodtents">
-        <div id="tentsGrid" class="tents-grid">
-          <!-- Wordt dynamisch gevuld via JavaScript -->
-        </div>
-      </section>
-
     </div>
-  </main>
 
-  <!-- VEILIGHEIDSBELOFTES SECTIE -->
-  <section id="veiligheid-sectie" class="safety-section">
-    <div class="container">
-      <div class="section-heading">
-        <h2>Onze 4 Veiligheidsbeloftes op het Plein</h2>
-        <p>Wanneer je te maken hebt met meerdere of ernstige allergieën, telt elk detail in de keuken. Daarom hanteren alle deelnemende foodtents deze vaste regels:</p>
-      </div>
-
-      <div class="safety-grid">
-        <article class="safety-card">
-          <div class="safety-icon">🧼</div>
-          <h3>Gescheiden Bereidingszones</h3>
-          <p>Elke kraam werkt met aparte werkbanken, frituurpannen en bakplaten zodat sporen van allergenen geen kans krijgen.</p>
-        </article>
-
-        <article class="safety-card">
-          <div class="safety-icon">📋</div>
-          <h3>Gecertificeerde Ingrediënten</h3>
-          <p>Van sauzen en kruidenmixen tot bakolie: elk ingrediënt wordt vooraf gecontroleerd op verborgen sporen en fabriekswaarschuwingen.</p>
-        </article>
-
-        <article class="safety-card">
-          <div class="safety-icon">🍴</div>
-          <h3>Kleurgecodeerd Keukengerei</h3>
-          <p>Tangen, snijplanken en messen hebben vaste kleurcodes en worden na elke bereiding direct gewisseld en gereinigd.</p>
-        </article>
-
-        <article class="safety-card">
-          <div class="safety-icon">👩‍🍳</div>
-          <h3>Getraind Allergenen-Team</h3>
-          <p>Bij elke foodtent staat minimaal één opgeleide allergenen-coördinator klaar om je persoonlijk te adviseren bij je bestelling.</p>
-        </article>
-      </div>
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-5 right-5 z-50 transform translate-y-20 opacity-0 transition-all duration-300 bg-slate-900 text-white px-5 py-3 rounded-2xl shadow-xl flex items-center space-x-3 pointer-events-none">
+        <i id="toast-icon" class="fa-solid fa-circle-check text-emerald-400"></i>
+        <span id="toast-message" class="text-sm font-medium">Bericht</span>
     </div>
-  </section>
 
-  <!-- AANMELDEN SECTIE -->
-  <section id="aanmelden-sectie" class="section">
-    <div class="container">
-      <div class="section-heading">
-        <h2>Heb jij een allergievrije foodtent?</h2>
-        <p>Meld jouw foodtruck of kraam aan voor de volgende editie van AllergieVrij Food Plaza.</p>
-      </div>
+    <script>
+        // MASTER ALLERGY DATA & DEFINITIONS
+        const ALLERGIES = [
+            { id: 'glutenvrij', name: 'Glutenvrij', icon: 'fa-wheat-awn-circle-exclamation' },
+            { id: 'lactosevrij', name: 'Lactosevrij', icon: 'fa-cow' },
+            { id: 'notenvrij', name: 'Notenvrij', icon: 'fa-seedling' },
+            { id: 'pindavrij', name: 'Pindavrij', icon: 'fa-ban' },
+            { id: 'sojavrij', name: 'Sojavrij', icon: 'fa-leaf' },
+            { id: 'eivrij', name: 'Eivrij', icon: 'fa-egg' },
+            { id: 'schaaldier', name: 'Schaaldieren-vrij', icon: 'fa-shrimp' },
+            { id: 'sesamvrij', name: 'Sesamvrij', icon: 'fa-mortar-pestle' },
+            { id: 'vegan', name: '100% Vegan', icon: 'fa-plant-wilt' }
+        ];
 
-      <div class="register-box">
-        <form id="registerTentForm">
-          <div class="form-grid">
-            <div class="form-group">
-              <label for="tentName">Naam van de foodtent *</label>
-              <input type="text" id="tentName" required placeholder="Bijv. De Pure Pannenkoek" />
-            </div>
+        // INITIAL FOOD STALLS DATA
+        const DEFAULT_FOOD_TENTS = [
+            // ===== ECHTE ZAKEN IN LEIDEN (controleer altijd bij de zaak zelf) =====
+            {
+                id: 'real-floors',
+                description: "Gezellige koffie- en brunchbar aan de Doezastraat waar de hele kaart glutenvrij is en zoveel mogelijk biologisch. Je kunt er ontbijten, lunchen en iets zoets eten. Volgens gasten is het ook fijn met kinderen, en reserveren wordt aangeraden.",
+                name: "Floor's Coffee & Brunch Bar",
+                category: 'Ontbijt, Lunch & Gebak',
+                location: 'Doezastraat 14, Leiden',
+                certificate: '🌾 Volledig glutenvrij restaurant (bron: Sleutelstad / NCV)',
+                image: 'https://images.unsplash.com/photo-1565299585323-38d6b0865b47?auto=format&fit=crop&w=800&q=80',
+                allergies: ['glutenvrij'],
+                safetyInfo: 'Het hele menu is glutenvrij en zoveel mogelijk biologisch, dus er is geen gluten in de keuken. Over andere allergenen (zoals noten, ei of lactose) is geen informatie beschikbaar: vraag hier altijd naar bij het personeel.',
+                contact: 'Via het restaurant (Doezastraat, Leiden)',
+                menu: [
+                    { item: 'Ontbijt, lunch en gebak', price: 'Zie menukaart', ingredients: 'Volledig glutenvrij. Andere allergenen: vraag het personeel.', tags: ['Glutenvrij'] },
+                    { item: 'Poffertjes en croissants', price: 'Zie menukaart', ingredients: 'Volgens gastenreviews glutenvrij verkrijgbaar. Controleer de ingrediënten ter plekke.', tags: ['Glutenvrij'] }
+                ]
+            },
+            {
+                id: 'real-fratelli',
+                description: "Italiaans restaurant aan de Lange Mare met glutenvrije pizza en pasta op de kaart. Handig als je met een groep gaat waarin niet iedereen glutenvrij eet.",
+                name: 'Fratelli',
+                category: 'Italiaans - Pizza & Pasta',
+                location: 'Lange Mare 112, Leiden',
+                certificate: 'ℹ️ Glutenvrije opties (bron: Find Me GF)',
+                image: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=800&q=80',
+                allergies: ['glutenvrij'],
+                safetyInfo: 'Er zijn glutenvrije pizza en pasta beschikbaar. Er is geen bevestigde informatie over kruisbesmetting in de keuken: meld je allergie altijd bij het bestellen en vraag hoe de gerechten worden bereid.',
+                contact: 'Via het restaurant (Lange Mare 112, Leiden)',
+                menu: [
+                    { item: 'Glutenvrije pizza', price: 'Zie menukaart', ingredients: 'Vraag naar de samenstelling en bereidingswijze.', tags: ['Glutenvrij'] },
+                    { item: 'Glutenvrije pasta', price: 'Zie menukaart', ingredients: 'Vraag naar de samenstelling en bereidingswijze.', tags: ['Glutenvrij'] }
+                ]
+            },
+            {
+                id: 'real-siri-thai',
+                description: "Thais restaurant aan de Doezastraat met glutenvrije gerechten, zoals curry en pad thai. Vraag bij het bestellen naar de saus, want sojasaus bevat vaak tarwe.",
+                name: 'Siri Thai',
+                category: 'Thais',
+                location: 'Doezastraat 11, Leiden',
+                certificate: 'ℹ️ Glutenvrije opties (bron: Find Me GF)',
+                image: 'https://images.unsplash.com/photo-1541696432-82c6da8ce7bf?auto=format&fit=crop&w=800&q=80',
+                allergies: ['glutenvrij'],
+                safetyInfo: 'Er zijn glutenvrije gerechten zoals curry en pad thai. Er is geen bevestigde informatie over kruisbesmetting: vraag naar saus (sojasaus bevat vaak tarwe) en bereiding.',
+                contact: 'Via het restaurant (Doezastraat 11, Leiden)',
+                menu: [
+                    { item: 'Curry en Pad Thai (glutenvrij)', price: 'Zie menukaart', ingredients: 'Controleer sauzen en bouillon op gluten.', tags: ['Glutenvrij'] }
+                ]
+            },
+            {
+                id: 'real-t-fust',
+                description: "Restaurant aan de Garenmarkt met onder meer burgers en visgerechten. Een gast schrijft dat bijna alles glutenvrij kan worden gemaakt, en anders wordt er een alternatief bedacht. Bel vooraf voor zekerheid.",
+                name: "Restaurant 't Fust",
+                category: 'Restaurant - Burgers & Vis',
+                location: 'Garenmarkt 16, Leiden',
+                certificate: 'ℹ️ Gemelde glutenvrije opties (door gebruikers gemeld)',
+                image: 'https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=800&q=80',
+                allergies: ['glutenvrij'],
+                safetyInfo: 'Volgens gebruikers kunnen veel gerechten glutenvrij worden bereid. Dit is niet officieel bevestigd: bel vooraf of vraag het personeel.',
+                contact: 'Via het restaurant (Garenmarkt 16, Leiden)',
+                menu: [
+                    { item: 'Glutenvrije burger, brood en dessert', price: 'Zie menukaart', ingredients: 'Op aanvraag aangepast. Vraag naar de ingrediënten.', tags: ['Glutenvrij'] }
+                ]
+            },
+            {
+                id: 'real-annies',
+                description: "Casual eetgelegenheid aan de Hoogstraat met friet, burgers en broodjes, waarvan er glutenvrije varianten zijn. Er is ook glutenvrij cider te krijgen.",
+                name: "Annie's",
+                category: 'Burgers & Friet',
+                location: 'Hoogstraat 1A, Leiden',
+                certificate: 'ℹ️ Glutenvrije opties (bron: Find Me GF)',
+                image: 'https://images.unsplash.com/photo-1576107232684-1279f3908594?auto=format&fit=crop&w=800&q=80',
+                allergies: ['glutenvrij'],
+                safetyInfo: 'Er zijn glutenvrije friet, burgers en broodjes. Vraag of er een aparte frituur wordt gebruikt, want daarover is geen bevestigde informatie.',
+                contact: 'Via het restaurant (Hoogstraat 1A, Leiden)',
+                menu: [
+                    { item: 'Glutenvrije friet, burgers en broodjes', price: 'Zie menukaart', ingredients: 'Vraag naar bereidingswijze en frituur.', tags: ['Glutenvrij'] }
+                ]
+            },
+            {
+                id: 'real-paco-ciao',
+                description: "Vegetarisch restaurant met gerechten uit de hele wereld, op loopafstand van station Leiden Centraal. Er is een late ontbijtkaart tot 16.00 uur, en de hele kaart is glutenvrij. Een hoofdgerecht kost ongeveer € 20 tot € 25.",
+                name: 'Paco Ciao',
+                category: 'Vegetarisch & Vegan',
+                location: 'Leiden (bij station Leiden Centraal)',
+                certificate: 'ℹ️ Hele kaart glutenvrij (bron: NS Dagje Uit)',
+                image: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=800&q=80',
+                allergies: ['glutenvrij'],
+                safetyInfo: 'Volgens NS Dagje Uit houdt het restaurant rekening met intoleranties en allergieën en is de hele kaart glutenvrij. Er is geen bevestigde informatie over andere allergenen of kruisbesmetting: vraag dit altijd na bij het personeel.',
+                contact: 'Via het restaurant (Leiden)',
+                menu: [
+                    { item: 'Shakshuka, falafel-gerechten en vegan kapsalon', price: 'Zie menukaart', ingredients: 'Vega- en vegan-gerechten. Controleer sauzen en andere allergenen ter plekke.', tags: ['Glutenvrij', 'Vega/Vegan'] }
+                ]
+            },
+            {
+                id: 'real-slachthuis',
+                description: "Kleine, gezellige zaak voor vegan comfort food. Gasten noemen het verse eten, de vriendelijke bediening en de nette prijzen.",
+                name: 'Het Slachthuis',
+                category: 'Vegan Comfort Food',
+                location: 'Leiden',
+                certificate: 'ℹ️ 100% vegan volgens gastenreviews (bron: Wanderlog)',
+                image: 'https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=800&q=80',
+                allergies: ['vegan'],
+                safetyInfo: 'Gasten beschrijven het eten als 100% vegan. Dat betekent geen dierlijke ingrediënten, maar zegt niets over gluten, noten, soja of sesam. Vraag naar de ingrediënten en kruisbesmetting als je een allergie hebt.',
+                contact: 'Via het restaurant (Leiden)',
+                menu: [
+                    { item: 'Vegan comfort food', price: 'Zie menukaart', ingredients: 'Plantaardig. Andere allergenen (soja, noten, gluten): vraag het personeel.', tags: ['Vegan'] }
+                ]
+            },
+            {
+                id: 'real-anne-max',
+                description: "Biologisch restaurant waar plantaardige ingrediënten centraal staan. De winterbowl met geroosterde groenten en kikkererwten wordt veel aanbevolen. Ongeveer twintig minuten lopen vanaf station Leiden Centraal.",
+                name: 'Anne & Max',
+                category: 'Biologisch - Vegetarisch & Vegan',
+                location: 'Leiden',
+                certificate: 'ℹ️ Plantaardige ingrediënten, biologisch (bron: NS Dagje Uit)',
+                image: 'https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=800&q=80',
+                allergies: [],
+                safetyInfo: 'Het restaurant werkt met plantaardige, biologische ingrediënten en heeft veel vegan gerechten. Er is geen bevestigde informatie over specifieke allergenen of kruisbesmetting: vraag dit na bij het personeel.',
+                contact: 'Via het restaurant (Leiden)',
+                menu: [
+                    { item: 'Winterbowl met geroosterde groenten en kikkererwten', price: 'Zie menukaart', ingredients: 'Geroosterde groenten, kikkererwten, baba ganoush, citroendressing. Controleer sesam (baba ganoush bevat vaak tahini).', tags: ['Vegan'] }
+                ]
+            },
+            {
+                id: 'real-hoezo',
+                description: "Gezellig, vrij klein restaurant met vegetarische en vegan gerechten, met veel kruiden en specerijen. Gasten noemen onder meer de dumplings, de Cajun stew en de rode curry. Het kan druk zijn, dus reserveer of kom op een rustig moment.",
+                name: 'HOEZO',
+                category: 'Vegetarisch & Vegan',
+                location: 'Leiden',
+                certificate: 'ℹ️ Veel vegan opties (bron: HappyCow / Wanderlog)',
+                image: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=800&q=80',
+                allergies: [],
+                safetyInfo: 'Vegetarisch restaurant met veel vegan gerechten en vegetarische gerechten die vegan gemaakt kunnen worden. Er is geen bevestigde informatie over allergenen of kruisbesmetting: vraag dit altijd na.',
+                contact: 'Via het restaurant (Leiden)',
+                menu: [
+                    { item: 'Vegan en vegetarische gerechten', price: 'Zie menukaart', ingredients: 'Onder andere curry en burgers. Vraag naar de ingrediënten.', tags: ['Vega/Vegan'] }
+                ]
+            },
+            {
+                id: 'real-logica',
+                description: "Biologisch restaurant aan een gracht in het centrum, geschikt voor ontbijt, lunch en diner. Je vindt er broodjes, salades, warme gerechten en vegan gebak.",
+                name: 'Logica',
+                category: 'Biologisch Restaurant & Lunch',
+                location: 'Leiden centrum',
+                certificate: 'ℹ️ Veel vegan opties (bron: HappyCow)',
+                image: 'https://images.unsplash.com/photo-1498837167922-ddd27525d352?auto=format&fit=crop&w=800&q=80',
+                allergies: [],
+                safetyInfo: 'Biologisch restaurant met veel vegan opties (broodjes, salades, warme gerechten, vegan gebak). Er is geen bevestigde informatie over allergenen of kruisbesmetting: vraag dit altijd na.',
+                contact: 'Via het restaurant (Leiden)',
+                menu: [
+                    { item: 'Broodjes, salades en vegan gebak', price: 'Zie menukaart', ingredients: 'Vraag naar de ingrediënten.', tags: ['Vega/Vegan'] }
+                ]
+            },
+            {
+                id: 'real-blossom',
+                description: "Lunchroom en café van conceptwinkel Kleine Planeet, met een bohemian uitstraling en een terras. Er zijn veel suikervrije, glutenvrije, vegetarische en vegan keuzes.",
+                name: 'Blossom (Kleine Planeet)',
+                category: 'Lunchroom & Café',
+                location: 'Leiden',
+                certificate: 'ℹ️ Glutenvrije, suikervrije en vegan keuzes (bron: HappyCow)',
+                image: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=800&q=80',
+                allergies: [],
+                safetyInfo: 'Lunchroom met veel suikervrije, glutenvrije, vegetarische en vegan keuzes. Niet alles is glutenvrij of vegan, dus vraag per gerecht na wat geschikt is voor jouw allergie.',
+                contact: 'Via het restaurant (Leiden)',
+                menu: [
+                    { item: 'Lunchgerechten en gebak', price: 'Zie menukaart', ingredients: 'Er zijn glutenvrije en vegan keuzes. Vraag naar de ingrediënten.', tags: ['Vega/Vegan'] }
+                ]
+            },
+            {
+                id: 'real-zeebries',
+                name: 'Strandpaviljoen De Zeebries',
+                category: 'Strandpaviljoen - Brunch & Diner',
+                location: 'Noordwijk (aan het strand)',
+                certificate: 'ℹ️ Allergievriendelijke opties (bron: het strandpaviljoen zelf)',
+                image: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=800&q=80',
+                description: "Strandpaviljoen aan het strand van Noordwijk waar je kunt brunchen, uitgebreid eten of een hapje tussendoor nemen. Het paviljoen biedt allergievriendelijke opties: er zijn gluten- en lactosevrije gerechten, en ook mogelijkheden die ei- en pindavrij zijn.",
+                allergies: ['glutenvrij', 'lactosevrij', 'eivrij', 'pindavrij'],
+                safetyInfo: 'Het paviljoen geeft aan dat er gluten- en lactosevrije gerechten zijn, en ook opties die ei- en pindavrij zijn. Dit gaat om opties op de kaart, niet om een volledig allergenenvrije keuken. Over kruisbesmetting is geen informatie beschikbaar: meld je allergie altijd bij het bestellen en vraag welke gerechten voor jou geschikt zijn.',
+                contact: 'Via het strandpaviljoen (Noordwijk)',
+                menu: [
+                    { item: 'Brunch, diner en hapjes (allergievriendelijke opties)', price: 'Zie menukaart', ingredients: 'Er zijn gluten- en lactosevrije gerechten en ei- en pindavrije mogelijkheden. Vraag per gerecht welke allergenen erin zitten.', tags: ['Glutenvrij', 'Lactosevrij', 'Eivrij', 'Pindavrij'] }
+                ]
+            },
+            {
+                id: 'real-presso',
+                name: 'IJssalon Presso',
+                category: 'IJs & Desserts',
+                location: 'Locatie: zie IJssalon Presso',
+                certificate: 'ℹ️ Glutenvrije hoorntjes en allergenen-informatie (bron: de ijssalon zelf)',
+                image: 'https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=800&q=80',
+                description: "IJssalon waar je ook met een gluten- of ei-allergie van een bolletje ijs kunt genieten. Er zijn glutenvrije ijshoorntjes en de salon geeft duidelijke informatie over de allergenen in het ijs, zodat je zelf kunt zien welke smaken bij jou passen. Er is keuze uit onder andere vanille, fruitsmaken en chocolade.",
+                allergies: ['glutenvrij', 'eivrij'],
+                safetyInfo: 'De ijssalon heeft glutenvrije ijshoorntjes en geeft duidelijke informatie over de allergenen in het ijs. Niet elke smaak is geschikt voor elke allergie: bekijk de allergeneninformatie per smaak en vraag het personeel als je twijfelt. Over kruisbesmetting (bijvoorbeeld via ijsscheppen) is geen informatie beschikbaar, dus meld je allergie altijd bij het bestellen.',
+                contact: 'Via de ijssalon',
+                menu: [
+                    { item: 'Glutenvrije ijshoorntjes', price: 'Zie prijslijst', ingredients: 'Glutenvrije hoorntjes beschikbaar. Vraag er specifiek naar.', tags: ['Glutenvrij'] },
+                    { item: 'Bolletjes ijs: vanille, fruitsmaken en chocolade', price: 'Zie prijslijst', ingredients: 'Allergenen per smaak zijn zichtbaar. Controleer of de smaak geschikt is voor jouw gluten- of ei-allergie.', tags: ['Allergenen-info'] }
+                ]
+            },
+            {
+                id: 'real-nozems',
+                name: 'NOZEMS',
+                category: 'Ontbijt- & Lunchbar',
+                location: 'Locatie: zie NOZEMS',
+                certificate: 'ℹ️ Glutenvrij brood en vegan opties (bron: NOZEMS zelf)',
+                image: 'https://images.unsplash.com/photo-1525351484163-7529414344d8?auto=format&fit=crop&w=800&q=80',
+                description: "Ontbijt- en lunchbar met een fijne, ontspannen sfeer, voor een uitgebreid ontbijt, een lunch of een kop koffie met iets lekkers. Er is glutenvrij brood, bananenbrood en er zijn verschillende veganistische opties. Leuk om met vrienden te komen of om alleen even te genieten.",
+                allergies: ['glutenvrij', 'vegan'],
+                safetyInfo: 'NOZEMS heeft glutenvrij brood en verschillende veganistische opties. Het gaat om opties op de kaart, niet om een volledig glutenvrije of veganistische zaak. Over kruisbesmetting (bijvoorbeeld bij het snijden of toasten van brood) is geen informatie beschikbaar: meld je allergie altijd bij het bestellen.',
+                contact: 'Via NOZEMS',
+                menu: [
+                    { item: 'Glutenvrij brood', price: 'Zie menukaart', ingredients: 'Glutenvrij brood beschikbaar. Vraag naar de beleg- en bereidingswijze.', tags: ['Glutenvrij'] },
+                    { item: 'Bananenbrood', price: 'Zie menukaart', ingredients: 'Controleer de ingrediënten ter plekke (onder andere gluten, ei en noten).', tags: ['Vraag naar allergenen'] },
+                    { item: 'Veganistische opties', price: 'Zie menukaart', ingredients: 'Verschillende plantaardige gerechten. Vraag naar soja, noten en sesam.', tags: ['Vegan'] }
+                ]
+            },
+            {
+                id: 'real-koffiemeulen',
+                name: 'De Koffiemeulen',
+                category: 'Koffie, Snacks & Taart',
+                location: 'Locatie: zie De Koffiemeulen',
+                certificate: 'ℹ️ Glutenvrije en sojavrije opties (bron: De Koffiemeulen zelf)',
+                image: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=800&q=80',
+                description: "Gezellige plek voor een kop koffie, een snack of een stuk taart, om even te ontspannen of bij te praten. Ook met een allergie zijn er mogelijkheden: er zijn glutenvrije en sojavrije opties.",
+                allergies: ['glutenvrij', 'sojavrij'],
+                safetyInfo: 'De Koffiemeulen heeft glutenvrije en sojavrije opties. Het gaat om opties op de kaart, niet om een volledig glutenvrije of sojavrije zaak. Over kruisbesmetting (bijvoorbeeld bij taart en snacks) is geen informatie beschikbaar: meld je allergie altijd bij het bestellen en vraag welke producten voor jou geschikt zijn.',
+                contact: 'Via De Koffiemeulen',
+                menu: [
+                    { item: 'Koffie', price: 'Zie menukaart', ingredients: 'Vraag naar sojamelk of andere plantaardige melk als je soja moet vermijden.', tags: ['Vraag naar allergenen'] },
+                    { item: 'Snacks', price: 'Zie menukaart', ingredients: 'Er zijn glutenvrije en sojavrije opties. Vraag per snack naar de ingrediënten.', tags: ['Glutenvrij', 'Sojavrij'] },
+                    { item: 'Taart', price: 'Zie menukaart', ingredients: 'Er zijn glutenvrije en sojavrije opties. Vraag welke taart geschikt is voor jouw allergie.', tags: ['Glutenvrij', 'Sojavrij'] }
+                ]
+            },
+            {
+                id: 'real-dwarse',
+                name: 'De Dwarse',
+                category: 'Cafetaria - Snacks & Patat',
+                location: 'Voorhout',
+                certificate: 'ℹ️ Aandacht voor allergenen (bron: de cafetaria zelf)',
+                image: 'https://images.unsplash.com/photo-1576107232684-1279f3908594?auto=format&fit=crop&w=800&q=80',
+                description: "Cafetaria in Voorhout voor een lekkere snack of een portie patat. Er wordt rekening gehouden met verschillende allergieën, met aandacht voor weekdieren, mosterd en sesamzaad, zodat je makkelijker een keuze maakt die bij jouw voedingswensen past.",
+                allergies: [],
+                safetyInfo: 'De cafetaria geeft aan dat er aandacht is voor allergieën, in het bijzonder voor weekdieren, mosterd en sesamzaad. Dit betekent niet dat alle gerechten vrij zijn van deze allergenen. Over kruisbesmetting (bijvoorbeeld via de frituur) is geen informatie beschikbaar: meld je allergie altijd bij het bestellen en vraag welke producten voor jou geschikt zijn.',
+                contact: 'Via de cafetaria (Voorhout)',
+                menu: [
+                    { item: 'Snacks en patat', price: 'Zie menukaart', ingredients: 'Er is aandacht voor weekdieren, mosterd en sesamzaad. Vraag per product naar de allergenen en of er een aparte frituur wordt gebruikt.', tags: ['Allergenen-info'] }
+                ]
+            },
+            {
+                id: 'real-ons-genoegen',
+                name: 'Lunchroom Ons Genoegen',
+                category: 'Lunchroom - Lunch, Koffie & Gebak',
+                location: 'Locatie: zie Lunchroom Ons Genoegen',
+                certificate: 'ℹ️ Glutenvrije mogelijkheden en allergenen-aandacht (bron: de lunchroom zelf)',
+                image: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=800&q=80',
+                description: "Gezellige lunchroom voor een lunch, een goede kop koffie en iets lekkers uit de vitrine, van lunchgerechten tot vers gebak. Er zijn verschillende glutenvrije mogelijkheden. De lunchroom houdt rekening met allergieën, waaronder gluten, lupine, noten, ei, weekdieren en soja.",
+                allergies: ['glutenvrij'],
+                safetyInfo: 'De lunchroom heeft verschillende glutenvrije mogelijkheden en houdt rekening met allergieën voor gluten, lupine, noten, ei, weekdieren en soja. Dit betekent niet dat alle producten vrij zijn van deze allergenen, en over kruisbesmetting (bijvoorbeeld in de vitrine) is geen informatie beschikbaar. Meld je allergie altijd bij het bestellen en vraag welke producten voor jou geschikt zijn.',
+                contact: 'Via Lunchroom Ons Genoegen',
+                menu: [
+                    { item: 'Lunchgerechten', price: 'Zie menukaart', ingredients: 'Er zijn glutenvrije mogelijkheden. Vraag per gerecht naar de allergenen (gluten, lupine, noten, ei, weekdieren, soja).', tags: ['Glutenvrij'] },
+                    { item: 'Vers gebak uit de vitrine', price: 'Zie vitrine', ingredients: 'Vraag welk gebak geschikt is voor jouw allergie en of het glutenvrij is.', tags: ['Vraag naar allergenen'] },
+                    { item: 'Koffie', price: 'Zie menukaart', ingredients: 'Vraag naar plantaardige melk (zoals soja) als dat voor jou van belang is.', tags: ['Vraag naar allergenen'] }
+                ]
+            },
+            {
+                id: 'real-chique-simpel',
+                name: 'Chique en Simpel',
+                category: 'Restaurant - Diner',
+                location: 'Locatie: zie Chique en Simpel',
+                certificate: 'ℹ️ Aandacht voor allergenen en vegetarische gerechten (bron: het restaurant zelf)',
+                image: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=800&q=80',
+                description: "Restaurant voor een gezellige avond uit in een fijne, rustige sfeer: chique, maar niet overdreven. Het restaurant houdt rekening met allergieën, zoals gluten, lactose, pinda's en noten, en heeft ook vegetarische gerechten.",
+                allergies: [],
+                safetyInfo: "Het restaurant geeft aan rekening te houden met allergieën zoals gluten, lactose, pinda's en noten. Dit betekent niet dat alle gerechten vrij zijn van deze allergenen, en over kruisbesmetting in de keuken is geen informatie beschikbaar. Meld je allergie daarom altijd bij het reserveren en bij het bestellen.",
+                contact: 'Via Chique en Simpel',
+                menu: [
+                    { item: 'Diner', price: 'Zie menukaart', ingredients: "Er wordt rekening gehouden met gluten, lactose, pinda's en noten. Vraag per gerecht naar de allergenen.", tags: ['Allergenen-info'] },
+                    { item: 'Vegetarische gerechten', price: 'Zie menukaart', ingredients: 'Verschillende vegetarische opties. Vegetarisch is niet automatisch vrij van melk, ei of gluten.', tags: ['Vegetarisch'] }
+                ]
+            },
+            {
+                id: 'real-nissa',
+                name: 'Nissa Healthy Hotspot',
+                category: 'Gezonde Maaltijden & Lunch',
+                location: 'Locatie: zie Nissa Healthy Hotspot',
+                certificate: 'ℹ️ Lactosevrije, vegan, lupinevrije en weekdiervrije opties (bron: Nissa zelf)',
+                image: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=800&q=80',
+                description: "Healthy hotspot waar gezonde maaltijden en verse ingrediënten centraal staan, met gerechten voor een lichte lunch of een gezonde maaltijd. Er zijn lactosevrije en veganistische gerechten, en ook lupinevrije en weekdiervrije opties, zodat er voor verschillende dieetwensen en allergieën iets te kiezen is.",
+                allergies: ['lactosevrij', 'vegan'],
+                safetyInfo: 'Nissa heeft lactosevrije en veganistische gerechten, en ook lupinevrije en weekdiervrije opties. Het gaat om opties op de kaart, niet om een volledig allergenenvrije keuken. Over kruisbesmetting is geen informatie beschikbaar: meld je allergie altijd bij het bestellen en vraag welke gerechten voor jou geschikt zijn.',
+                contact: 'Via Nissa Healthy Hotspot',
+                menu: [
+                    { item: 'Gezonde maaltijden', price: 'Zie menukaart', ingredients: 'Bereid met verse ingrediënten. Vraag per gerecht naar de allergenen.', tags: ['Vraag naar allergenen'] },
+                    { item: 'Lactosevrije gerechten', price: 'Zie menukaart', ingredients: 'Verschillende lactosevrije opties. Vraag welke gerechten dat zijn.', tags: ['Lactosevrij'] },
+                    { item: 'Veganistische gerechten', price: 'Zie menukaart', ingredients: 'Verschillende plantaardige opties. Vraag naar soja, noten en sesam.', tags: ['Vegan'] },
+                    { item: 'Lupinevrije en weekdiervrije opties', price: 'Zie menukaart', ingredients: 'Er zijn opties zonder lupine en zonder weekdieren. Vraag welke gerechten dat zijn.', tags: ['Lupinevrij', 'Weekdiervrij'] },
+                    { item: 'Lichte lunch', price: 'Zie menukaart', ingredients: 'Gerechten en producten voor een lichte lunch. Vraag naar de ingrediënten.', tags: ['Vraag naar allergenen'] }
+                ]
+            },
+            {
+                id: 'real-havenkwartier',
+                name: 'Brasserie Havenkwartier',
+                category: 'Brasserie - Lunch, Diner & Drankjes',
+                location: 'Katwijk',
+                certificate: 'ℹ️ Gerechten aanpasbaar aan allergieën (bron: de brasserie zelf)',
+                image: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=800&q=80',
+                description: "Brasserie in Katwijk voor een gezellige lunch, een diner of een drankje. De keuken houdt bij de bereiding rekening met dieetwensen en allergieën en kan gerechten en bereidingen aanpassen aan wat een gast nodig heeft. Geef je wensen vooraf door, dan wordt er samen gekeken naar een passend gerecht.",
+                allergies: [],
+                safetyInfo: 'De keuken kan rekening houden met gluten, mosterd, noten, schaaldieren, selderij, sesamzaad, soja en weekdieren. Dit betekent niet dat de gerechten standaard vrij zijn van deze allergenen: de brasserie past gerechten aan op verzoek. Geef je allergie daarom altijd vooraf door, bij het reserveren en bij het bestellen. Over kruisbesmetting is geen informatie beschikbaar, dus vraag daar zelf naar.',
+                contact: 'Via Brasserie Havenkwartier (Katwijk)',
+                menu: [
+                    { item: 'Lunch en diner', price: 'Zie menukaart', ingredients: 'Gerechten kunnen op verzoek worden aangepast. Geef je allergie vooraf door.', tags: ['Aanpasbaar op verzoek'] },
+                    { item: 'Aanpassingen voor allergieën', price: '-', ingredients: 'De keuken kan rekening houden met gluten, mosterd, noten, schaaldieren, selderij, sesamzaad, soja en weekdieren.', tags: ['Allergenen-info'] }
+                ]
+            },
+            {
+                id: 'real-gys',
+                name: 'Restaurant Gys',
+                category: 'Restaurant - Ontbijt, Lunch & Diner',
+                location: 'Utrecht (Voorstraat 77)',
+                certificate: '🌾 NCV-keurmerk Lekker Glutenvrij + notenvrije opties (bron: Gys zelf)',
+                image: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=800&q=80',
+                description: "Restaurant in Utrecht dat gasten met een notenallergie welkom heet. Er is een scala aan notenvrije opties, ook bij het ontbijt en de lunch, en er is vegan, gluten- en notenvrije patisserie. Gys is gecontroleerd door de Nederlandse Coeliakie Vereniging en heeft het keurmerk Lekker Glutenvrij. Geef je allergie door bij het reserveren en nog eens bij binnenkomst.",
+                allergies: ['notenvrij', 'glutenvrij'],
+                safetyInfo: 'Gys heeft notenvrije opties op het menu, maar gebruikt soms wel noten in gerechten. Het gaat dus om notenvrije opties en niet om een volledig notenvrije keuken. Het restaurant is door de NCV gecontroleerd en heeft het keurmerk Lekker Glutenvrij. Geef je notenallergie door bij het reserveren en laat het bij binnenkomst nog een keer weten aan het personeel.',
+                contact: 'Via Restaurant Gys (Utrecht)',
+                menu: [
+                    { item: 'Notenvrije gerechten (ontbijt, lunch en diner)', price: 'Zie menukaart', ingredients: 'Veel gerechten zijn notenvrij of kunnen notenvrij worden geserveerd. Noten worden soms wel gebruikt in de keuken.', tags: ['Notenvrij'] },
+                    { item: 'Vegan, glutenvrije en notenvrije patisserie', price: 'Zie menukaart', ingredients: 'Patisserie zonder gluten, noten en dierlijke producten.', tags: ['Notenvrij', 'Glutenvrij', 'Vegan'] }
+                ]
+            },
+            {
+                id: 'real-vierlinden',
+                name: 'De Vierlinden',
+                category: 'Restaurant - Lunch & Diner',
+                location: 'Goes',
+                certificate: 'ℹ️ Menu met aangegeven notenallergie-info (bron: De Vierlinden zelf)',
+                image: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=800&q=80',
+                description: "Restaurant in Goes waar de koks de hele menukaart hebben doorgenomen en per gerecht hebben aangegeven of er noten in zitten. Op de allergenenpagina zie je precies welke gerechten je met een notenallergie wel en niet kunt eten. De koks zijn op de hoogte van alle ingrediënten en houden graag rekening met je allergie.",
+                allergies: ['notenvrij'],
+                safetyInfo: 'In de keuken van De Vierlinden worden wel noten verwerkt. Het restaurant geeft per gerecht aan of er noten in zitten, zodat je kunt zien welke gerechten notenvrij zijn. Geef je notenallergie door bij het reserveren en vermeld bij het bestellen duidelijk bij welk gerecht de allergie van toepassing is.',
+                contact: 'Via De Vierlinden (Goes)',
+                menu: [
+                    { item: 'Lunch- en dinergerechten', price: 'Zie menukaart', ingredients: 'Per gerecht staat aangegeven of er noten in zitten. Bekijk de allergenenpagina op de website van het restaurant.', tags: ['Notenvrij (per gerecht aangegeven)'] }
+                ]
+            },
+            {
+                id: 'real-de-keet',
+                name: 'Eetcafé De Keet',
+                category: 'Eetcafé - Lunch, Diner & Borrel',
+                location: 'Purmerend',
+                certificate: 'ℹ️ Aparte oven en frituur voor glutenvrij en lactosevrij (bron: De Keet zelf)',
+                image: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=800&q=80',
+                description: "Eetcafé in Purmerend dat gespecialiseerd is in bewust koken voor mensen met allergieën en voedselbeperkingen. Er is een aparte oven en frituur voor glutenvrije en lactosevrije etenswaren, en een allergenenkaart waarop staat in welke gerechten welke allergenen zitten. Je kunt er terecht voor lunch, diner en borrel.",
+                allergies: ['glutenvrij', 'lactosevrij'],
+                safetyInfo: 'De Keet heeft een aparte oven en frituur voor glutenvrije en lactosevrije etenswaren. Op de allergenenkaart staat aangegeven welke allergenen in de gerechten zitten, waaronder gluten, lactose, schaal- en schelpdieren, nachtschade, pinda, zaden en noten. Het restaurant houdt rekening met deze allergieën, maar dat betekent niet dat alle gerechten daarvan vrij zijn: gebruik de allergenenkaart en meld je allergie altijd bij het bestellen.',
+                contact: 'Via Eetcafé De Keet (Purmerend)',
+                menu: [
+                    { item: 'Glutenvrije en lactosevrije gerechten', price: 'Zie menukaart', ingredients: 'Bereid in een aparte oven en frituur. Vraag naar de allergenenkaart.', tags: ['Glutenvrij', 'Lactosevrij'] },
+                    { item: 'Allergenenkaart', price: '-', ingredients: 'Overzicht van allergenen per gerecht: gluten, lactose, schaal- en schelpdieren, nachtschade, pinda, zaden en noten.', tags: ['Allergenen-info'] }
+                ]
+            }
+        ];
 
-            <div class="form-group">
-              <label for="contactPerson">Contactpersoon *</label>
-              <input type="text" id="contactPerson" required placeholder="Voor- en achternaam" />
-            </div>
+        // STATE MANAGEMENT
+        let foodTents = [];
+        let selectedFilters = new Set();
+        let searchQuery = '';
+        let favorites = new Set();
+        let favoritesOnly = false;
 
-            <div class="form-group">
-              <label for="contactEmail">E-mailadres *</label>
-              <input type="email" id="contactEmail" required placeholder="naam@foodtent.nl" />
-            </div>
+        // Initialize App State
+        function initApp() {
+            // Load saved favorites
+            try {
+                const savedFavs = localStorage.getItem('allergievrij_favorites');
+                if (savedFavs) favorites = new Set(JSON.parse(savedFavs));
+            } catch (e) {
+                favorites = new Set();
+            }
 
-            <div class="form-group">
-              <label for="cuisineType">Type keuken *</label>
-              <select id="cuisineType" required>
-                <option value="">Kies een categorie...</option>
-                <option value="Bakkerij & Zoet">Bakkerij &amp; Zoet</option>
-                <option value="Wereldkeuken & Bowls">Wereldkeuken &amp; Bowls</option>
-                <option value="Streetfood & Burgers">Streetfood &amp; Burgers</option>
-                <option value="Soepen & Stoofgerechten">Soepen &amp; Stoofgerechten</option>
-                <option value="IJs & Wafels">IJs &amp; Wafels</option>
-              </select>
-            </div>
-          </div>
+            // Load saved food tents or default
+            try {
+                const savedTents = localStorage.getItem('allergievrij_custom_tents');
+                if (savedTents) {
+                    foodTents = [...DEFAULT_FOOD_TENTS, ...JSON.parse(savedTents)];
+                } else {
+                    foodTents = [...DEFAULT_FOOD_TENTS];
+                }
+            } catch (e) {
+                foodTents = [...DEFAULT_FOOD_TENTS];
+            }
 
-          <div class="form-group">
-            <label>Welke allergenen sluit jouw keuken 100% uit?</label>
-            <div id="formAllergenCheckboxes" class="checkbox-grid">
-              <!-- Wordt dynamisch gevuld via JavaScript -->
-            </div>
-          </div>
+            renderFilterButtons();
+            renderAddModalCheckboxes();
+            renderTents();
+            updateFavBadge();
+        }
 
-          <div class="form-group">
-            <label for="protocolNotes">Korte toelichting op jullie kruisbesmettingsprotocol *</label>
-            <textarea
-              id="protocolNotes"
-              rows="3"
-              required
-              placeholder="Beschrijf kort hoe jullie gescheiden bereiden en ingrediënten controleren..."
-            ></textarea>
-          </div>
+        // Save State Helpers
+        function saveFavorites() {
+            try {
+                localStorage.setItem('allergievrij_favorites', JSON.stringify([...favorites]));
+            } catch(e) {}
+            updateFavBadge();
+        }
 
-          <button type="submit" class="btn btn-full">
-            ✅ Foodtent Aanmelden
-          </button>
+        function updateFavBadge() {
+            document.getElementById('fav-count-badge').textContent = favorites.size;
+        }
 
-          <div id="formFeedback" class="form-feedback" role="status"></div>
-        </form>
-      </div>
-    </div>
-  </section>
+        // Render Filter Matrix Buttons
+        function renderFilterButtons() {
+            const grid = document.getElementById('allergy-filter-grid');
+            grid.innerHTML = ALLERGIES.map(allergy => {
+                const isActive = selectedFilters.has(allergy.id);
+                return `
+                    <button onclick="toggleFilter('${allergy.id}')" 
+                        class="flex items-center space-x-2 px-3 py-2.5 rounded-2xl border text-xs sm:text-sm font-medium transition-all duration-200 text-left ${
+                            isActive 
+                            ? 'bg-emerald-600 text-white border-emerald-600 shadow-md shadow-emerald-600/20' 
+                            : 'bg-slate-50 text-slate-700 border-slate-200 hover:border-emerald-300 hover:bg-emerald-50/50'
+                        }">
+                        <i class="fa-solid ${allergy.icon} ${isActive ? 'text-white' : 'text-emerald-600'} text-base"></i>
+                        <span class="truncate">${allergy.name}</span>
+                    </button>
+                `;
+            }).join('');
 
-  <!-- FOOTER -->
-  <footer>
-    <div class="container">
-      <div class="footer-grid">
-        <div>
-          <h3>🌿 AllergieVrij Food Plaza</h3>
-          <p>Het culinaire streetfoodplein waar mensen met meervoudige voedselallergieën ontspannen en veilig samen kunnen eten.</p>
-        </div>
+            updateActiveFilterTags();
+        }
 
-        <div>
-          <h4>Snelle navigatie</h4>
-          <ul class="footer-links">
-            <li><a href="#filter-sectie">Allergie Filter Matrix</a></li>
-            <li><a href="#foodtents-sectie">Alle Foodtents</a></li>
-            <li><a href="#veiligheid-sectie">Veiligheidsbeloftes</a></li>
-            <li><a href="#aanmelden-sectie">Foodtent Aanmelden</a></li>
-          </ul>
-        </div>
+        function toggleFilter(allergyId) {
+            if (selectedFilters.has(allergyId)) {
+                selectedFilters.delete(allergyId);
+            } else {
+                selectedFilters.add(allergyId);
+            }
+            renderFilterButtons();
+            renderTents();
+        }
 
-        <div>
-          <h4>Allergenen Informatiepunt</h4>
-          <p>Vragen ter plaatse? Bezoek onze centrale infobalie naast Kraam #01 of neem contact op via <strong>info@allergievrijfoodplaza.nl</strong>.</p>
-        </div>
-      </div>
+        function resetFilters() {
+            selectedFilters.clear();
+            searchQuery = '';
+            favoritesOnly = false;
+            document.getElementById('search-input').value = '';
+            document.getElementById('clear-search-btn').classList.add('hidden');
+            
+            // Reset Fav button UI
+            const favBtn = document.getElementById('fav-toggle-btn');
+            favBtn.classList.remove('bg-amber-500', 'text-white', 'border-amber-500');
+            favBtn.classList.add('border-slate-200', 'text-slate-700');
 
-      <div class="footer-bottom">
-        © 2026 AllergieVrij Food Plaza — Speciaal ontwikkeld voor bezoekers met voedselallergieën.
-      </div>
-    </div>
-  </footer>
+            renderFilterButtons();
+            renderTents();
+            showToast('Alle zoekfilters zijn gewist.');
+        }
 
-  <!-- DETAIL MODAL (MENU & PROTOCOL) -->
-  <div id="detailModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-    <div class="modal-card">
-      <img id="modalImage" class="modal-hero-img" src="" alt="" />
-      <div class="modal-content">
-        <div class="modal-top">
-          <div>
-            <span id="modalStallBadge" class="tent-cuisine"></span>
-            <h2 id="modalTitle"></h2>
-          </div>
-          <button type="button" id="modalFavBtn" class="btn">♥ Favoriet</button>
-        </div>
+        function updateActiveFilterTags() {
+            const container = document.getElementById('active-filter-tags');
+            if (selectedFilters.size === 0 && !favoritesOnly && !searchQuery) {
+                container.innerHTML = '';
+                return;
+            }
 
-        <p id="modalDesc"></p>
+            let tagsHtml = '';
+            selectedFilters.forEach(id => {
+                const item = ALLERGIES.find(a => a.id === id);
+                if (item) {
+                    tagsHtml += `
+                        <span class="inline-flex items-center gap-1 bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-md font-semibold">
+                            ${item.name}
+                            <i class="fa-solid fa-xmark text-xs cursor-pointer hover:text-emerald-900" onclick="toggleFilter('${id}')"></i>
+                        </span>
+                    `;
+                }
+            });
 
-        <div id="modalBadges" class="tent-badges" style="margin-top: 14px;"></div>
+            if (favoritesOnly) {
+                tagsHtml += `
+                    <span class="inline-flex items-center gap-1 bg-amber-100 text-amber-800 px-2 py-0.5 rounded-md font-semibold">
+                        Alleen Favorieten
+                        <i class="fa-solid fa-xmark text-xs cursor-pointer hover:text-amber-900" onclick="toggleFavoritesOnly()"></i>
+                    </span>
+                `;
+            }
 
-        <div class="protocol-box">
-          <h4>🛡️ Keuken- &amp; Kruisbesmettingsprotocol</h4>
-          <p id="modalProtocol"></p>
-        </div>
+            container.innerHTML = tagsHtml;
+        }
 
-        <h3 style="font-size: 1.15rem; font-weight: 800;">🍽️ Signature Gerechten op het Menu</h3>
-        <div id="modalMenuList" class="menu-list"></div>
+        function handleSearch() {
+            const val = document.getElementById('search-input').value.trim();
+            searchQuery = val.toLowerCase();
+            const clearBtn = document.getElementById('clear-search-btn');
+            
+            if (val.length > 0) {
+                clearBtn.classList.remove('hidden');
+            } else {
+                clearBtn.classList.add('hidden');
+            }
 
-        <div class="modal-footer-actions">
-          <span style="font-size: 0.88rem; font-weight: 700;">💡 Meld jouw allergieën altijd even bij de balie.</span>
-          <button type="button" id="closeModal
+            renderTents();
+        }
+
+        function clearSearch() {
+            document.getElementById('search-input').value = '';
+            handleSearch();
+        }
+
+        function toggleFavoritesOnly() {
+            favoritesOnly = !favoritesOnly;
+            const favBtn = document.getElementById('fav-toggle-btn');
+            if (favoritesOnly) {
+                favBtn.classList.add('bg-amber-500', 'text-white', 'border-amber-500');
+                favBtn.classList.remove('border-slate-200', 'text-slate-700');
+                showToast('Toont nu alleen jouw bewaarde favorieten.');
+            } else {
+                favBtn.classList.remove('bg-amber-500', 'text-white', 'border-amber-500');
+                favBtn.classList.add('border-slate-200', 'text-slate-700');
+            }
+            updateActiveFilterTags();
+            renderTents();
+        }
+
+        function toggleFavorite(id, event) {
+            if (event) event.stopPropagation();
+            if (favorites.has(id)) {
+                favorites.delete(id);
+                showToast('Kraampje verwijderd uit favorieten');
+            } else {
+                favorites.add(id);
+                showToast('Kraampje opgeslagen als favoriet!');
+            }
+            saveFavorites();
+            renderTents();
+        }
+
+        // Filter Logic & Rendering Cards
+        function renderTents() {
+            const container = document.getElementById('tents-container');
+            const emptyState = document.getElementById('empty-state');
+
+            // Apply Filters
+            const filtered = foodTents.filter(tent => {
+                if (favoritesOnly && !favorites.has(tent.id)) return false;
+
+                if (searchQuery) {
+                    const matchName = tent.name.toLowerCase().includes(searchQuery);
+                    const matchCat = tent.category.toLowerCase().includes(searchQuery);
+                    const matchMenu = tent.menu.some(m => m.item.toLowerCase().includes(searchQuery) || m.ingredients.toLowerCase().includes(searchQuery));
+                    if (!matchName && !matchCat && !matchMenu) return false;
+                }
+
+                if (selectedFilters.size > 0) {
+                    for (let allergy of selectedFilters) {
+                        if (!tent.allergies.includes(allergy)) return false;
+                    }
+                }
+
+                return true;
+            });
+
+            document.getElementById('results-count').textContent = `${filtered.length} ${filtered.length === 1 ? 'kraampje' : 'restaurants'}`;
+
+            if (filtered.length === 0) {
+                container.innerHTML = '';
+                emptyState.classList.remove('hidden');
+                return;
+            }
+
+            emptyState.classList.add('hidden');
+
+            container.innerHTML = filtered.map(tent => {
+                const isFav = favorites.has(tent.id);
+                
+                const allergyBadges = tent.allergies.map(aId => {
+                    const item = ALLERGIES.find(a => a.id === aId);
+                    if (!item) return '';
+                    return `
+                        <span class="inline-flex items-center gap-1 bg-slate-100 border border-slate-200 text-slate-700 text-[11px] font-semibold px-2 py-0.5 rounded-md">
+                            <i class="fa-solid ${item.icon} text-emerald-600"></i> ${item.name}
+                        </span>
+                    `;
+                }).join('');
+
+                return `
+                    <div class="bg-white rounded-3xl overflow-hidden border border-slate-200/80 shadow-md hover:shadow-xl transition-all duration-300 flex flex-col group">
+                        <!-- Image Header -->
+                        <div class="relative h-48 overflow-hidden bg-slate-100">
+                            <img src="${tent.image}" alt="${tent.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=800&q=80'">
+                            
+                            <span class="absolute top-3 left-3 bg-slate-900/80 backdrop-blur-md text-white text-xs font-semibold px-3 py-1 rounded-full shadow">
+                                <i class="fa-solid fa-location-dot text-emerald-400 mr-1"></i> ${tent.location}
+                            </span>
+
+                            <button onclick="toggleFavorite('${tent.id}', event)" class="absolute top-3 right-3 w-9 h-9 bg-white/90 backdrop-blur-md rounded-full flex items-center justify-center shadow hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-heart ${isFav ? 'text-amber-500' : 'text-slate-300'} text-base"></i>
+                            </button>
+                        </div>
+
+                        <!-- Card Body -->
+                        <div class="p-5 flex-grow flex flex-col justify-between">
+                            <div>
+                                ${tent.isExample ? '<span class="inline-block bg-amber-100 text-amber-800 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded mb-2"><i class="fa-solid fa-flask mr-1"></i>Voorbeeld - fictief kraampje</span>' : ''}
+                                <div class="text-xs font-semibold text-emerald-600 uppercase tracking-wider mb-1">${tent.category}</div>
+                                <h3 class="text-lg font-bold text-slate-900 leading-snug mb-2 group-hover:text-emerald-700 transition-colors">${tent.name}</h3>
+
+                                <div class="inline-block bg-emerald-50 text-emerald-800 text-xs font-semibold px-2.5 py-1 rounded-lg border border-emerald-200 mb-3">
+                                    ${tent.certificate}
+                                </div>
+
+                                <div class="flex flex-wrap gap-1.5 mb-4">
+                                    ${allergyBadges}
+                                </div>
+                            </div>
+
+                            <button onclick="openModal('${tent.id}')" class="w-full mt-2 bg-slate-100 hover:bg-emerald-600 hover:text-white text-slate-800 font-semibold text-xs py-3 rounded-xl transition-all flex items-center justify-center space-x-2 group/btn">
+                                <span>Bekijk Menu & Veiligheid</span>
+                                <i class="fa-solid fa-arrow-right text-xs group-hover/btn:translate-x-1 transition-transform"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Modal Controls
+        function openModal(tentId) {
+            const tent = foodTents.find(t => t.id === tentId);
+            if (!tent) return;
+
+            document.getElementById('modal-image').src = tent.image;
+            document.getElementById('modal-title').textContent = tent.name;
+            document.getElementById('modal-stand-location').textContent = tent.location;
+            document.getElementById('modal-safety-info').textContent = (tent.isExample ? 'VOORBEELD: dit is een fictief kraampje en geen echte zaak. ' : '') + tent.safetyInfo;
+            document.getElementById('modal-certificate').textContent = tent.certificate;
+            document.getElementById('modal-contact').textContent = tent.contact || 'Evenementenbalie';
+
+            const allergiesContainer = document.getElementById('modal-allergies-list');
+            allergiesContainer.innerHTML = tent.allergies.map(aId => {
+                const item = ALLERGIES.find(a => a.id === aId);
+                return item ? `
+                    <span class="bg-emerald-100 text-emerald-800 text-xs font-semibold px-2.5 py-1 rounded-lg flex items-center gap-1.5">
+                        <i class="fa-solid ${item.icon}"></i> ${item.name}
+                    </span>
+                ` : '';
+            }).join('');
+
+            const menuContainer = document.getElementById('modal-menu-list');
+            menuContainer.innerHTML = tent.menu.map(m => `
+                <div class="bg-slate-50 border border-slate-200/70 p-3.5 rounded-2xl">
+                    <div class="flex justify-between items-start mb-1">
+                        <span class="font-bold text-slate-800 text-sm">${m.item}</span>
+                        <span class="font-extrabold text-emerald-700 text-sm">${m.price}</span>
+                    </div>
+                    <p class="text-xs text-slate-500 mb-2"><strong>Ingrediënten:</strong> ${m.ingredients}</p>
+                    <div class="flex flex-wrap gap-1">
+                        ${m.tags.map(t => `<span class="bg-amber-100 text-amber-800 text-[10px] font-bold px-2 py-0.5 rounded">${t}</span>`).join('')}
+                    </div>
+                </div>
+            `).join('');
+
+            const descWrap = document.getElementById('modal-description-wrap');
+            if (tent.description) {
+                document.getElementById('modal-description').textContent = tent.description;
+                descWrap.classList.remove('hidden');
+            } else {
+                descWrap.classList.add('hidden');
+            }
+
+            document.getElementById('detail-modal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('detail-modal').classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+
+        function renderAddModalCheckboxes() {
+            const container = document.getElementById('add-modal-allergies');
+            container.innerHTML = ALLERGIES.map(a => `
+                <label class="flex items-center space-x-2 p-2 bg-slate-50 rounded-xl border border-slate-200 cursor-pointer hover:bg-slate-100">
+                    <input type="checkbox" name="add-allergy" value="${a.id}" class="rounded text-emerald-600 focus:ring-emerald-500">
+                    <span class="truncate">${a.name}</span>
+                </label>
+            `).join('');
+        }
+
+        function openAddModal() {
+            document.getElementById('add-modal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeAddModal() {
+            document.getElementById('add-modal').classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+
+        function handleAddTent(event) {
+            event.preventDefault();
+
+            const name = document.getElementById('input-name').value.trim();
+            const location = document.getElementById('input-location').value.trim();
+            const category = document.getElementById('input-category').value.trim();
+            const image = document.getElementById('input-image').value.trim() || 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=800&q=80';
+            const safetyInfo = document.getElementById('input-safety').value.trim();
+            const menuRaw = document.getElementById('input-menu').value.trim();
+
+            const selectedCheckboxes = document.querySelectorAll('input[name="add-allergy"]:checked');
+            const allergies = Array.from(selectedCheckboxes).map(cb => cb.value);
+
+            if (allergies.length === 0) {
+                showToast('Selecteer minimaal één allergie-optie.', true);
+                return;
+            }
+
+            const newTent = {
+                id: 'custom-' + Date.now(),
+                name,
+                category,
+                location,
+                certificate: '🛡️ Handmatig Toegevoegd & Verified',
+                image,
+                allergies,
+                safetyInfo,
+                contact: 'Aangemeld door Bezoeker',
+                menu: [
+                    {
+                        item: 'Specialiteit van de Kraam',
+                        price: 'Prijs op locatie',
+                        ingredients: menuRaw || 'Zie bord op locatie voor exacte ingrediënten.',
+                        tags: ['Vers bereid']
+                    }
+                ]
+            };
+
+            foodTents.unshift(newTent);
+            
+            try {
+                const savedTents = JSON.parse(localStorage.getItem('allergievrij_custom_tents') || '[]');
+                savedTents.unshift(newTent);
+                localStorage.setItem('allergievrij_custom_tents', JSON.stringify(savedTents));
+            } catch(e) {}
+
+            closeAddModal();
+            document.getElementById('add-tent-form').reset();
+            renderTents();
+            showToast('Nieuwe food tent succesvol toegevoegd!');
+        }
+
+        // Toast Messages
+        function showToast(message, isError = false) {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toast-message');
+            const toastIcon = document.getElementById('toast-icon');
+
+            toastMsg.textContent = message;
+            if (isError) {
+                toastIcon.className = 'fa-solid fa-circle-xmark text-red-400';
+            } else {
+                toastIcon.className = 'fa-solid fa-circle-check text-emerald-400';
+            }
+
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+
+            setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeModal();
+                closeAddModal();
+            }
+        });
+
+        window.onload = initApp;
+    </script>
+</body>
+</html>
